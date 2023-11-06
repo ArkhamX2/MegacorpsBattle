@@ -29,17 +29,16 @@ def main():
     while run:
         clock.tick(60)
         player_count = n.send(p)[0]
-        print(player_count)
         match player_count:
-            case 1:
+            case 2:
                 p2 = n.send(p)[1]
                 p3 = None
                 p4 = None
-            case 2:
+            case 3:
                 p2 = n.send(p)[1]
                 p3 = n.send(p)[2]
                 p4 = None
-            case 3:
+            case 4:
                 p2 = n.send(p)[1]
                 p3 = n.send(p)[2]
                 p4 = n.send(p)[3]
