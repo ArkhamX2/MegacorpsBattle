@@ -2,6 +2,7 @@ import socket
 from _thread import *
 from player import Player
 import pickle
+import psutil
 
 class User():
     def __init__(self, id, ip):
@@ -43,8 +44,8 @@ def threaded_client(conn, player, user):
                 else:
                     reply = players[1]
 
-                print("Received: ", data)
-                print("Sending : ", reply)
+                #print("Received: ", data)
+                #print("Sending : ", reply)
 
             conn.sendall(pickle.dumps(reply))
         except:
@@ -53,12 +54,22 @@ def threaded_client(conn, player, user):
     print("Lost connection")
     conn.close()
 
+def get_ip_addresses(family):
+    for interface, snics in psutil.net_if_addrs().items():
+        for snic in snics:
+            if snic.family == -1 :
+                mac = snic.address
+            if snic.family == 2 :
+                yield (interface, snic.address, snic.netmask, mac)
+
 currentPlayer = 0
 dt = list()
 listusers=[]
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
+    ipv4 = list(get_ip_addresses(s))
+    print(ipv4)
     if addr[0] in dt:
         for user in listusers:
             if user.connected != True and addr[0]==user.ip:
