@@ -7,7 +7,6 @@ class Player(User):
 
     def __init__(self,name:str, developmentPoints:int):
         super().__init__(0,name)
-        self.cards = cards
         self.development_points = developmentPoints
 
 

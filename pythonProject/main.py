@@ -5,6 +5,7 @@ from library.cards.card import Card
 from library.cards.attackCard import *
 from library.cards.defenceCard import *
 from library.cards.developerCard import *
+from library.player import Player
 
 
 GREEN = (200, 255, 200)
@@ -15,6 +16,14 @@ sc = pygame.display.set_mode((800, 700))
 sc.fill(GREEN)
 
 from library.cards.deck import Deck
+
+players = [
+    Player("Dealer",0),
+    Player("Player1",1),
+    Player("Player2",1),
+    Player("Player3",1),
+    Player("Player4",1),
+]
 
 deck = Deck(
         [Advertisement(),
@@ -27,7 +36,12 @@ deck = Deck(
         TrojanCard(),
         SpyCard()
         ])
-        
+
+deck.deal(players)
+for card in deck.cards:
+    print(card.owner)
+
+
 rects = []
 for card in deck.cards:
     rects.append(card.rect)

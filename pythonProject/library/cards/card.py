@@ -11,17 +11,14 @@ class CardType(Enum):
 
 
 class Card(pygame.sprite.Sprite):
-    isOposite:bool
-    cardImage:str
-    cardImageOposite:str
-    owner:Player
-    isThrown:bool
-    
+
 
     def __init__(self, isOposite:bool, image:str):   
         self.cardImage = image     
         self.cardImageOposite = "cardOposite.png"
         self.isOposite = isOposite
+        self.owner = 0
+        self.isThrown = False
 
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(RESOURSES_PATH + self.cardImage).convert_alpha()
@@ -41,4 +38,7 @@ class Card(pygame.sprite.Sprite):
     def Throw(self):
         self.isThrown = True
 
+    def __str__(self):
+        string = "Card" + self.cardImage
+        return string
     
