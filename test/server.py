@@ -8,8 +8,7 @@ class User():
         self.ip=ip
         self.connected=True
 
-#server = "10.160.2.103"
-server = "localhost"
+server = "10.160.2.103"
 port = 6666
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +31,7 @@ def make_pos(tup):
 
 pos = [(0,0),(100,100)]
 
-def threaded_client(conn, player):
+def threaded_client(conn, player,user):
     conn.send(str.encode(make_pos(pos[player])))
     reply = ""
     while True:
@@ -41,6 +40,7 @@ def threaded_client(conn, player):
             pos[player] = data
 
             if not data:
+                user.connected=False
                 print("Disconnected")
                 break
             else:
@@ -57,6 +57,7 @@ def threaded_client(conn, player):
             break
 
     print("Lost connection")
+    user.connected = False
     conn.close()
 dt = list()
 listusers=[]
@@ -65,13 +66,14 @@ while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
     if addr[0] in dt:
-        print('ASdasdasdasd')
         for user in listusers:
-            if user.connected != True:
-                start_new_thread(threaded_client, (user.ip, user.id))
+            if user.connected != True and addr[0]==user.ip:
+                user.connected=True
+                start_new_thread(threaded_client, (conn, user.id,user))
+
     else:
         dt.append(addr[0])
         print(dt)
         listusers.append(User(currentPlayer, addr[0]))
-        start_new_thread(threaded_client, (conn, currentPlayer))
+        start_new_thread(threaded_client, (conn, currentPlayer,listusers[len(listusers)-1]))
         currentPlayer += 1
