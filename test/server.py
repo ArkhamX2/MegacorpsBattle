@@ -6,8 +6,9 @@ class User():
     def __init__(self, id, ip):
         self.id=id
         self.ip=ip
+        self.connected=True
 
-server = "localhost"
+server = "10.160.2.103"
 port = 6666
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -57,13 +58,17 @@ def threaded_client(conn, player):
     print("Lost connection")
     conn.close()
 dt = list()
+listusers=[]
 currentPlayer = 0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
     if addr in dt:
-        pass
+        for user in listusers:
+            if user.connected != True:
+                start_new_thread(threaded_client, (conn, user.id))
     else:
         dt.append(addr)
+        listusers.append(User(currentPlayer, addr))
         start_new_thread(threaded_client, (conn, currentPlayer))
         currentPlayer += 1
