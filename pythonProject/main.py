@@ -1,36 +1,50 @@
 import pygame
 import sys
+import random
 from library.cards.card import Card
- 
+from library.cards.attackCard import *
+from library.cards.defenceCard import *
+from library.cards.developerCard import *
+
+
 GREEN = (200, 255, 200)
 WHITE = (255, 255, 255)
- 
-sc = pygame.display.set_mode((800, 600))
- 
-card = Card("qq","qq",(100,200),False)
-card2 = Card("qq","qq",(100,200),True)
-card3 = Card("qq","qq",(100,200),True)
- 
-rect = card.rect
-rect2 = card2.rect
-rect3 = card3.rect
+pygame.init()
+# sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+sc = pygame.display.set_mode((800, 700))
+sc.fill(GREEN)
 
-print(rect.width, rect.height)  # 100
-print(rect.x, rect.y)  # 0 0
- 
+from library.cards.deck import Deck
+
+deck = Deck(
+        [Advertisement(),
+        AntivirusSpyWorm(),
+        AntivirusTrojanBotnet(),
+        AntivirusTrojanWorm(),
+        BlockFishingScripting(),
+        DoSAttackCard(),
+        DoSDefence(),
+        TrojanCard(),
+        SpyCard()
+        ])
+        
+rects = []
+for card in deck.cards:
+    rects.append(card.rect)
+
+sc.fill(GREEN)
+
 while 1:
+
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             sys.exit()
  
-    sc.fill(GREEN)
-    sc.blit(card.image, rect)
-    sc.blit(card2.image, rect2)
-    sc.blit(card3.image, rect3)
-    pygame.display.update()
+    for i in range(0,len(deck.cards)):
+        sc.blit(deck.cards[i].image, rects[i])
+        pygame.display.update()
+    
  
-    rect.x += 1
-    rect2.x += 5
-    rect3.y += 1
- 
-    pygame.time.delay(20)
+    pygame.time.delay(1000)
+
+    
