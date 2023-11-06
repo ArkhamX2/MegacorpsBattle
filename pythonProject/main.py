@@ -4,7 +4,7 @@ from client import  Client
 
 pygame.init()  # Инициализируем pygame
 
-HOST, PORT = "localhost", 8080  # Адрес сервера
+HOST, PORT = "10.160.2.103", 8080  # Адрес сервера
 
 client = Client((HOST, PORT))  # Создаем объект клиента
 
