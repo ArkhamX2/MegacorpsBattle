@@ -2,7 +2,7 @@ import socket
 from threading import Thread
 import json
 
-HOST, PORT = '10.160.2.103', 6666  # Адрес сервера
+HOST, PORT = '10.160.2.103', 8080  # Адрес сервера
 MAX_PLAYERS = 2  # Максимальное кол-во подключений
 
 
