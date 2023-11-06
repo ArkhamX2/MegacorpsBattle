@@ -24,21 +24,22 @@ def main():
     n = Network()
     p = n.getP()
     clock = pygame.time.Clock()
-    player_count=1
+    player_count=0
 
     while run:
         clock.tick(60)
-        player_count = n.send(p)
+        player_count = n.send(p)[0]
+        print(player_count)
         match player_count:
-            case 2:
+            case 1:
                 p2 = n.send(p)[1]
                 p3 = None
                 p4 = None
-            case 3:
+            case 2:
                 p2 = n.send(p)[1]
                 p3 = n.send(p)[2]
                 p4 = None
-            case 4:
+            case 3:
                 p2 = n.send(p)[1]
                 p3 = n.send(p)[2]
                 p4 = n.send(p)[3]
