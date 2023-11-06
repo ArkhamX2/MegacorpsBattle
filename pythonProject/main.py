@@ -7,13 +7,18 @@ from library.cards.defenceCard import *
 from library.cards.developerCard import *
 from library.player import Player
 
+Width = 1366
+Height = 768
 
 GREEN = (200, 255, 200)
 WHITE = (255, 255, 255)
 pygame.init()
 # sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-sc = pygame.display.set_mode((800, 700))
+sc = pygame.display.set_mode((Width, Height))
 sc.fill(GREEN)
+sf = pygame.image.load('pythonProject\\resourses\\Background.png')
+rt = sf.get_rect(bottomright = (Width,Height))
+sc.blit(sf,rt)
 
 from library.cards.deck import Deck
 
@@ -41,12 +46,9 @@ deck.deal(players)
 for card in deck.cards:
     print(card.owner)
 
-
 rects = []
 for card in deck.cards:
     rects.append(card.rect)
-
-sc.fill(GREEN)
 
 while 1:
 
