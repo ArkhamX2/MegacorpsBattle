@@ -23,7 +23,7 @@ s.listen(2)
 print("Waiting for a connection, Server Started")
 
 
-players = [Player(0,0,50,50,(255,0,0)), Player(100,100, 50,50, (0,0,255)), Player(0,0,50,50,(0,255,0))]
+players = [Player(0,0,50,50,(255,0,0)), Player(100,100, 50,50, (0,0,255)), Player(100,0,50,50,(0,255,0)), Player(0,100,50,50,(100,100,100))]
 
 def threaded_client(conn, player, user):
     conn.send(pickle.dumps(players[player]))
@@ -38,14 +38,11 @@ def threaded_client(conn, player, user):
                 print("Disconnected")
                 break
             else:
-                match player:
-                    case 0:
-                        reply = [players[1], players[2]]
-                    case 1:
-                        reply = [players[0], players[2]]
-                    case 2:
-                        reply = [players[0], players[1]]
-                        
+                reply=[]
+                for i in range(len(players)):
+                    if (i!=player):
+                        reply.append(players[i])
+
                 print("Received: ", data)
                 print("Sending : ", reply)
 
