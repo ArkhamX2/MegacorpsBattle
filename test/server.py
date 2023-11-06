@@ -38,7 +38,7 @@ def threaded_client(conn, player, user):
                 print("Disconnected")
                 break
             else:
-                reply=[]
+                reply=[currentPlayer]
                 for i in range(len(players)):
                     if (i!=player):
                         reply.append(players[i])
