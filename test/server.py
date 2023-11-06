@@ -2,6 +2,11 @@ import socket
 from _thread import *
 import sys
 
+class User():
+    def __init__(self, id, ip):
+        self.id=id
+        self.ip=ip
+
 server = "localhost"
 port = 6666
 
@@ -51,11 +56,12 @@ def threaded_client(conn, player):
 
     print("Lost connection")
     conn.close()
-
+dt = dict
 currentPlayer = 0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
-
+    if dt.c
+    lst.append()
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
