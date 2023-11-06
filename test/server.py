@@ -65,6 +65,7 @@ while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
     if conn in dt:
+        print('ASdasdasdasd')
         for user in listusers:
             if user.connected != True:
                 start_new_thread(threaded_client, (user.ip, user.id))
