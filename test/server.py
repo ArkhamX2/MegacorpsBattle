@@ -64,12 +64,12 @@ currentPlayer = 0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
-    if addr in dt:
+    if conn in dt:
         for user in listusers:
             if user.connected != True:
-                start_new_thread(threaded_client, (conn, user.id))
+                start_new_thread(threaded_client, (user.ip, user.id))
     else:
-        dt.append(addr)
-        listusers.append(User(currentPlayer, addr))
+        dt.append(conn)
+        listusers.append(User(currentPlayer, conn))
         start_new_thread(threaded_client, (conn, currentPlayer))
         currentPlayer += 1
