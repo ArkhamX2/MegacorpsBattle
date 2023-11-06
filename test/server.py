@@ -56,12 +56,14 @@ def threaded_client(conn, player):
 
     print("Lost connection")
     conn.close()
-dt = dict
+dt = list()
 currentPlayer = 0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
-    if dt.c
-    lst.append()
-    start_new_thread(threaded_client, (conn, currentPlayer))
-    currentPlayer += 1
+    if addr in dt:
+        pass
+    else:
+        dt.append(addr)
+        start_new_thread(threaded_client, (conn, currentPlayer))
+        currentPlayer += 1
