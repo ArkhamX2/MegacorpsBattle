@@ -8,7 +8,8 @@ class User():
         self.ip=ip
         self.connected=True
 
-server = "10.160.2.103"
+#server = "10.160.2.103"
+server = "localhost"
 port = 6666
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -48,8 +49,8 @@ def threaded_client(conn, player):
                 else:
                     reply = pos[1]
 
-                print("Received: ", data)
-                print("Sending : ", reply)
+                #print("Received: ", data)
+                #print("Sending : ", reply)
 
             conn.sendall(str.encode(make_pos(reply)))
         except:
