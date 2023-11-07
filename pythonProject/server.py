@@ -73,6 +73,15 @@ def startNewGame():
             d["BCards"]+=deck.getCardById(player.id)
     dealed=True
 
+def giveCart(players):
+    deck.deal(players)
+    for player in players:
+        if player.id != 0:
+            d["PHend"][player.id - 1] = deck.getCardById(player.id)
+            print(len(d["PHend"][player.id - 1]))
+            d["BCards"] += deck.getCardById(player.id)
+
+
 #d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 def threaded_client(conn, player):
     tmp=player-1
