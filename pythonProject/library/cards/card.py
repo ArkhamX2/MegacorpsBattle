@@ -2,7 +2,7 @@ from enum import Enum
 from library.player import Player
 import pygame
 
-RESOURSES_PATH = "pythonProject\\resourses\\"
+RESOURSES_PATH = "resourses\\"
 
 class CardType(Enum):
     defence = 1
@@ -19,6 +19,7 @@ class Card(pygame.sprite.Sprite):
         self.isOposite = isOposite
         self.owner = 0
         self.isThrown = False
+        self.isPlayed=False
 
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(RESOURSES_PATH + self.cardImage).convert_alpha()
