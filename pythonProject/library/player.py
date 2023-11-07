@@ -5,8 +5,8 @@ class Player(User):
     development_points:int
     name:str
 
-    def __init__(self,name:str, developmentPoints:int):
-        super().__init__(0,name)
+    def __init__(self,id:int,name:str, developmentPoints:int):
+        super().__init__(id,name)
         self.development_points = developmentPoints
 
 

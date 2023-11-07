@@ -6,6 +6,7 @@ from library.cards.attackCard import *
 from library.cards.defenceCard import *
 from library.cards.developerCard import *
 from library.player import Player
+from UI.handBox import HandBox
 
 Width = 1366
 Height = 768
@@ -23,11 +24,11 @@ sc.blit(sf,rt)
 from library.cards.deck import Deck
 
 players = [
-    Player("Dealer",0),
-    Player("Player1",1),
-    Player("Player2",1),
-    Player("Player3",1),
-    Player("Player4",1),
+    Player(0,"Dealer",0),
+    Player(1,"Player1",1),
+    Player(2,"Player2",1),
+    Player(3,"Player3",1),
+    Player(4,"Player4",1),
 ]
 
 deck = Deck(
@@ -46,26 +47,21 @@ deck = Deck(
 
 
 deck.deal(players)
-for card in deck.cards:
-    print(card.owner)
 
-rects = []
-for card in deck.cards:
-    Card=card.ReturnToCard()
-    rects.append(Card.rect)
+hand = HandBox(1,deck)
 
 while 1:
 
     for i in pygame.event.get():
+        keys = pygame.key.get_pressed()
         if i.type == pygame.QUIT:
             sys.exit()
- 
-    for i in range(0,len(deck.cards)):
-        Card=deck.cards[i].ReturnToCard()
-        sc.blit(Card.image, rects[i])
-        pygame.display.update()
-    
- 
-    pygame.time.delay(1000)
+        if keys[pygame.K_ESCAPE]:
+            sys.exit()
+
+    hand.draw(sc)
+    pygame.display.update()
+
+    pygame.time.delay(20)
 
     
