@@ -1,13 +1,6 @@
 import socket
 from _thread import *
-from player import Player
 import pickle
-
-class User():
-    def __init__(self, id, ip):
-        self.id=id
-        self.ip=ip
-        self.connected=True
 
 server = "localhost"
 port = 6666
@@ -57,7 +50,7 @@ currentPlayer = 0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
-    d["PNum"][currentPlayer]=currentPlayer
+    d["PNum"].append(currentPlayer)
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
     if len(d["PNum"]) == 4:
