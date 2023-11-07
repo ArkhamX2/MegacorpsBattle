@@ -13,11 +13,12 @@ class HandBox():
                 self.hand.append(card)
                 self.rects.append(card.ReturnToCard(card.isOposite).rect)
     
-    def place(self):
+    def placeCards(self):
         for i in range(0,len(self.rects)):
             self.rects[i].x,self.rects[i].y = self.x+10,self.y+10
-            self.rects[i].x += self.rects[i].width*i + self.rects[i].width//4
+            self.rects[i].x += self.rects[i].width*i + i*(self.rects[i].width//16)
             pygame.display.update()
+
         
     def flip(self):
         for i in range(0,len(self.rects)):
@@ -27,7 +28,7 @@ class HandBox():
 
 
     def draw(self,source):
-        self.place()
+        self.placeCards()
         for i in range(0,len(self.hand)):
             source.blit(self.hand[i].ReturnToCard(self.hand[i].isOposite).image, self.rects[i])
             pygame.display.update()

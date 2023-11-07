@@ -7,19 +7,22 @@ from library.cards.defenceCard import *
 from library.cards.developerCard import *
 from library.player import Player
 from UI.handBox import HandBox
-
-Width = 1366
-Height = 768
+from UI.handHandler import HandHandler
 
 PURPLE = (162, 148, 210)
 WHITE = (255, 255, 255)
+
+def updateBackground():
+    sc.fill(PURPLE)
+    sf = pygame.image.load('pythonProject\\resourses\\Background.png')
+    winSize = pygame.display.get_window_size()
+    rt = sf.get_rect(center = (winSize[0]//2,winSize[1]//2))
+    sc.blit(sf,rt)
+
 pygame.init()
-# sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-sc = pygame.display.set_mode((Width, Height))
-sc.fill(PURPLE)
-sf = pygame.image.load('pythonProject\\resourses\\Background.png')
-rt = sf.get_rect(center = (Width//2,Height//2))
-sc.blit(sf,rt)
+sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+#sc = pygame.display.set_mode((Width, Height))
+updateBackground()
 
 from library.cards.deck import Deck
 
@@ -53,10 +56,12 @@ deck = Deck(
         Tester137GoldDeveloper(True)
         ])
 
+
 deck.deal(players)
 
-hand = HandBox(1,deck)
+handHandler = HandHandler(HandBox(1,deck))
 
+initialized = False
 while 1:
 
     for i in pygame.event.get():
@@ -66,10 +71,13 @@ while 1:
         if keys[pygame.K_ESCAPE]:
             sys.exit()
 
-    hand.draw(sc)
-    hand.flip()
+    if initialized == False:
+        handHandler.placeHand(sc)
+
+    handHandler.update(sc)
+
     pygame.display.update()
 
-    pygame.time.delay(100)
+    pygame.time.delay(1)
 
     
