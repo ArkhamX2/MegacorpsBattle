@@ -2,6 +2,11 @@ import socket
 from _thread import *
 import pickle
 
+from pythonProject.library.cards.attackCard import *
+from pythonProject.library.cards.deck import Deck
+from pythonProject.library.cards.defenceCard import *
+from pythonProject.library.player import Player
+
 server = "localhost"
 port = 6666
 
@@ -17,8 +22,36 @@ print("Waiting for a connection, Server Started")
 
 start_game=False
 d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
+deck=[]
+def startNewGame():
+    players = [
+        Player(d["PNum"][0], "Player1", 1),
+        Player(d["PNum"][1], "Player2", 1),
+        Player(d["PNum"][2], "Player3", 1),
+        Player(d["PNum"][3], "Player4", 1),
+        Player(0, "Dealer", 0),
+    ]
+    deck = Deck(
+        [Advertisement(),
+         AntivirusSpyWorm(),
+         AntivirusTrojanBotnet(),
+         AntivirusTrojanWorm(),
+         BlockFishingScripting(),
+         DoSAttackCard(),
+         DoSDefence(),
+         TrojanCard(),
+         SpyCard()
+         ])
+
+    deck.deal(players)
+    for player in players:
+        if player.id!=0:
+            d["PHend"][player.id-1]=deck.getCardById(player.id)
+            d["BCards"]+=deck.getCardById(player.id)
+
 
 def threaded_client(conn, player):
+    player-=1
     conn.send(pickle.dumps([d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]))
     reply = ""
     while True:
@@ -45,7 +78,7 @@ def threaded_client(conn, player):
     print("Lost connection")
     conn.close()
 
-currentPlayer = 0
+currentPlayer = 1
 
 while True:
     conn, addr = s.accept()
@@ -55,3 +88,4 @@ while True:
     currentPlayer += 1
     if len(d["PNum"]) == 4:
         start_game=True
+        startNewGame()
