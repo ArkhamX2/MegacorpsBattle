@@ -1,4 +1,5 @@
 import socket
+import time
 import pygame
 from _thread import *
 import pickle
@@ -33,6 +34,7 @@ print("Waiting for a connection, Server Started")
 start_game=False
 d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 deck=[]
+dealed=False
 def startNewGame():
     print("Starting game...")
     players = [
@@ -43,43 +45,54 @@ def startNewGame():
         Player(0, "Dealer", 0),
     ]
     deck = Deck(
-        [Advertisement(),
-         AntivirusSpyWorm(),
-         AntivirusTrojanBotnet(),
-         AntivirusTrojanWorm(),
-         BlockFishingScripting(),
-         DoSAttackCard(),
-         DoSDefence(),
-         TrojanCard(),
-         SpyCard()
-         ])
+            [Advertisement(True),
+            AntivirusSpyWorm(True),
+            AntivirusTrojanBotnet(True),
+            AntivirusTrojanWorm(True),
+            BlockFishingScripting(True),
+            DoSAttackCard(True),
+            DoSDefence(True),
+            TrojanCard(True),
+            SpyCard(True),
+            BruteForceCard(True),
+            SiteScriptingCard(True),
+            WormCard(True),
+            BrandmauerCard(True),
+            PetrDeveloper(True),
+            MatveyDeveloper(True),
+            AlekseyDeveloper(True),
+            Tester137Developer(True),
+            Tester139Developer(True),
+            Tester137GoldDeveloper(True)
+            ])
 
     deck.deal(players)
     for player in players:
         if player.id!=0:
-            d["PHend"][player.id-1]=deck.getCardById(player.id)
-            print(d["PHend"])
+            d["PHend"][player.id-1]+=deck.getCardById(player.id)
             d["BCards"]+=deck.getCardById(player.id)
+    dealed=True
 
 #d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 def threaded_client(conn, player):
-    player-=1
-    conn.send(pickle.dumps([d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]))
+    tmp=player-1
+    conn.send(pickle.dumps([d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"]]))
     reply = ""
     while True:
         try:
             data = pickle.loads(conn.recv(2048))
-
-            d["PNum"][player] = data[0]
-            d["PHend"][player] = data[1]
-            d["BCards"] = data[2]
-            d["IsReady"] = data[3]
+            if dealed==True:
+                d["PNum"][tmp] = data[0]
+                d["PHend"][tmp] = data[1]
+                d["BCards"] = data[2]
+                d["IsReady"] = data[3]
 
             if not data:
                 print("Disconnected")
                 break
             else:
-                reply=[d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]
+                reply=[d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"]]
+                #time.sleep(3) 
 
                 #print("Received: ", data)
                 #print("Sending : ", reply)
