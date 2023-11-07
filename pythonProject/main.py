@@ -16,7 +16,7 @@ pygame.init()
 # sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 sc = pygame.display.set_mode((Width, Height))
 sc.fill(GREEN)
-sf = pygame.image.load('pythonProject\\resourses\\Background.png')
+sf = pygame.image.load('resourses\\Background.png')
 rt = sf.get_rect(bottomright = (Width,Height))
 sc.blit(sf,rt)
 
@@ -42,13 +42,17 @@ deck = Deck(
         SpyCard()
         ])
 
+
+
+
 deck.deal(players)
 for card in deck.cards:
     print(card.owner)
 
 rects = []
 for card in deck.cards:
-    rects.append(card.rect)
+    Card=card.ReturnToCard()
+    rects.append(Card.rect)
 
 while 1:
 
@@ -57,7 +61,8 @@ while 1:
             sys.exit()
  
     for i in range(0,len(deck.cards)):
-        sc.blit(deck.cards[i].image, rects[i])
+        Card=deck.cards[i].ReturnToCard()
+        sc.blit(Card.image, rects[i])
         pygame.display.update()
     
  
