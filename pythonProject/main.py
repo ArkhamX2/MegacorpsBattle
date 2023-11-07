@@ -43,9 +43,6 @@ deck = Deck(
         SpyCard()
         ])
 
-
-
-
 deck.deal(players)
 
 hand = HandBox(1,deck)

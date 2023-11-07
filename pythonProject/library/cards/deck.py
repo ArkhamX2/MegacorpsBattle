@@ -14,7 +14,7 @@ class Deck:
         tmp = []
         for i in range(MAX_DECK_SIZE*len(cardList)):
             tmp.append( TransferCard(i%len(cardList),0,0,0))
-        random.shuffle(tmp)
+        #random.shuffle(tmp)
         self.cards=tmp
 
     def shufle(self):
