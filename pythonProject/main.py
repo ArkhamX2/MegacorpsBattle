@@ -8,6 +8,8 @@ from library.cards.developerCard import *
 from library.player import Player
 from UI.handBox import HandBox
 from UI.handHandler import HandHandler
+from UI.activeBox import ActiveBox
+from UI.activeHandler import ActiveHandler
 
 PURPLE = (162, 148, 210)
 WHITE = (255, 255, 255)
@@ -60,7 +62,8 @@ deck = Deck(
 deck.deal(players)
 
 handHandler = HandHandler(HandBox(1,deck))
-colliders=[False,False,False,False,False,False]
+activeHandler = ActiveHandler(ActiveBox(1,deck,False))
+
 initialized = False
 while 1:
 
@@ -78,6 +81,9 @@ while 1:
 
     if initialized == False:
         handHandler.placeHand(sc)
+        activeHandler.placeHand(sc)
+        initialized = True
+        updateBackground()
 
     point = pygame.mouse.get_pos()
 
@@ -85,6 +91,7 @@ while 1:
         colliders[i]=handHandler.handbox.rects[i].collidepoint(point)
 
     handHandler.update(sc)
+    activeHandler.update(sc)
 
     pygame.display.update()
 
