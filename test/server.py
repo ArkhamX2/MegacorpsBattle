@@ -22,24 +22,26 @@ except socket.error as e:
 s.listen(2)
 print("Waiting for a connection, Server Started")
 
-d={"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
+start_game=False
+d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 
 def threaded_client(conn, player):
-    conn.send(pickle.dumps([d["PHend"][player],d["BCards"],d["IsReady"]]))
+    conn.send(pickle.dumps([d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]))
     reply = ""
     while True:
         try:
             data = pickle.loads(conn.recv(2048))
 
-            d["PHend"][player] = data[0]
-            d["BCards"]=data[1]
-            d["IsReady"]=data[2]
+            d["PNum"][player] = data[0]
+            d["PHend"][player] = data[1]
+            d["BCards"] = data[2]
+            d["IsReady"] = data[3]
 
             if not data:
                 print("Disconnected")
                 break
             else:
-                reply=[d["PHend"][player],d["BCards"],d["IsReady"]]
+                reply=[d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]
 
                 #print("Received: ", data)
                 #print("Sending : ", reply)
@@ -55,5 +57,8 @@ currentPlayer = 0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
+    d["PNum"][currentPlayer]=currentPlayer
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
+    if len(d["PNum"]) == 4:
+        start_game=True

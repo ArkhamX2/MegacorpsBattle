@@ -22,38 +22,24 @@ def redrawWindow(win,player, player2, player3, player4):
 def main():
     run = True
     n = Network()
-    p = n.getP()
+    d = n.getP()
+    print(d)
     clock = pygame.time.Clock()
     player_count=0
 
+    #[d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]
+    
     while run:
         clock.tick(60)
-        player_count = n.send(p)[0]
-        match player_count:
-            case 2:
-                p2 = n.send(p)[1]
-                p3 = None
-                p4 = None
-            case 3:
-                p2 = n.send(p)[1]
-                p3 = n.send(p)[2]
-                p4 = None
-            case 4:
-                p2 = n.send(p)[1]
-                p3 = n.send(p)[2]
-                p4 = n.send(p)[3]
-            case _:
-                p2=None
-                p3=None
-                p4=None
-
+        d = n.send(d)
+        print(d)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
 
-        p.move()
-        redrawWindow(win, p, p2, p3, p4)
+        #p.move()
+        #redrawWindow(win, p, p2, p3, p4)
 
 main()
