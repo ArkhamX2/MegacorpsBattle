@@ -2,10 +2,10 @@ import socket
 from _thread import *
 import pickle
 
-from pythonProject.library.cards.attackCard import *
-from pythonProject.library.cards.deck import Deck
-from pythonProject.library.cards.defenceCard import *
-from pythonProject.library.player import Player
+from library.cards.attackCard import *
+from library.cards.deck import Deck
+from library.cards.defenceCard import *
+from library.player import Player
 
 server = "localhost"
 port = 6666
