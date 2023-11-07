@@ -17,17 +17,14 @@ class Deck:
     def deal(self, players:[Player]):
         for i in range(1,len(players)):
             cardCounter = self.checkIfFull(i)
-            print(cardCounter)
+ 
             for card in self.cards:
-                print("before dealed "+ str(card.owner)+ str(cardCounter))
                 if card.owner == 0 and not(card.isThrown):
                     card.owner = i
                     cardCounter += 1
                     
-                    print("dealed "+ str(card.owner)+ str(cardCounter))
                 if cardCounter == 6:
                     break
-                print("after dealed "+ str(card.owner)+ str(cardCounter))
 
             
                 

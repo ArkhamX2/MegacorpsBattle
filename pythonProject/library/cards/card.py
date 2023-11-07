@@ -8,6 +8,7 @@ class CardType(Enum):
     defence = 1
     attack = 2
     developer = 3
+    event = 4
 
 
 class Card(pygame.sprite.Sprite):
