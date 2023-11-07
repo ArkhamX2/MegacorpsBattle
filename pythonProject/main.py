@@ -17,7 +17,7 @@ pygame.init()
 # sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 sc = pygame.display.set_mode((Width, Height))
 sc.fill(GREEN)
-sf = pygame.image.load('resourses\\Background.png')
+sf = pygame.image.load('pythonProject\\resourses\\Background.png')
 rt = sf.get_rect(bottomright = (Width,Height))
 sc.blit(sf,rt)
 

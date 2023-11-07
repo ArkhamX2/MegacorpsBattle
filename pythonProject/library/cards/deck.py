@@ -1,9 +1,9 @@
 import copy
 import random
-from pythonProject.library.cards.card import Card
-from pythonProject.library.player import Player
+from library.cards.card import Card
+from library.player import Player
 
-from pythonProject.library.cards.TransferCard import TransferCard
+from library.cards.TransferCard import TransferCard
 
 MAX_DECK_SIZE = 4
 

@@ -1,5 +1,5 @@
-from pythonProject.library.cards.attackCard import *
-from pythonProject.library.cards.defenceCard import *
+from library.cards.attackCard import *
+from library.cards.defenceCard import *
 
 
 class TransferCard:

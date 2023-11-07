@@ -2,7 +2,7 @@ from enum import Enum
 from library.player import Player
 import pygame
 
-RESOURSES_PATH = "resourses\\"
+RESOURSES_PATH = "pythonProject\\resourses\\"
 
 class CardType(Enum):
     defence = 1
