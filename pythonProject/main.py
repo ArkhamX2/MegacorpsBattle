@@ -48,14 +48,7 @@ deck = Deck(
 
 deck.deal(players)
 
-<<<<<<< Updated upstream
-rects = []
-for card in deck.cards:
-    Card=card.ReturnToCard()
-    rects.append(Card.rect)
-=======
 hand = HandBox(1,deck)
->>>>>>> Stashed changes
 
 while 1:
 
@@ -63,16 +56,6 @@ while 1:
         keys = pygame.key.get_pressed()
         if i.type == pygame.QUIT:
             sys.exit()
-<<<<<<< Updated upstream
- 
-    for i in range(0,len(deck.cards)):
-        Card=deck.cards[i].ReturnToCard()
-        sc.blit(Card.image, rects[i])
-        pygame.display.update()
-    
- 
-    pygame.time.delay(1000)
-=======
         if keys[pygame.K_ESCAPE]:
             sys.exit()
 
@@ -80,6 +63,5 @@ while 1:
     pygame.display.update()
 
     pygame.time.delay(20)
->>>>>>> Stashed changes
 
     
