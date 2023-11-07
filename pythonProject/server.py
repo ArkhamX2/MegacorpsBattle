@@ -1,5 +1,4 @@
 import socket
-import time
 import pygame
 from _thread import *
 import pickle
