@@ -1,15 +1,25 @@
 import socket
+import pygame
 from _thread import *
 import pickle
-
-from pythonProject.library.cards.attackCard import *
-from pythonProject.library.cards.deck import Deck
-from pythonProject.library.cards.defenceCard import *
-from pythonProject.library.player import Player
+from library.cards.card import Card
+from library.cards.attackCard import *
+from library.cards.defenceCard import *
+from library.cards.developerCard import *
+from library.player import Player
+from UI.handBox import HandBox
+from library.cards.deck import Deck
 
 server = "localhost"
 port = 6666
+Width = 100
+Height = 100
 
+GREEN = (200, 255, 200)
+WHITE = (255, 255, 255)
+pygame.init()
+sc = pygame.display.set_mode((Width, Height))
+sc.fill(GREEN)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
@@ -24,6 +34,7 @@ start_game=False
 d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 deck=[]
 def startNewGame():
+    print("Starting game...")
     players = [
         Player(d["PNum"][0], "Player1", 1),
         Player(d["PNum"][1], "Player2", 1),
@@ -47,9 +58,10 @@ def startNewGame():
     for player in players:
         if player.id!=0:
             d["PHend"][player.id-1]=deck.getCardById(player.id)
+            print(d["PHend"])
             d["BCards"]+=deck.getCardById(player.id)
 
-
+#d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 def threaded_client(conn, player):
     player-=1
     conn.send(pickle.dumps([d["PNum"][player],d["PHend"][player],d["BCards"],d["IsReady"]]))
