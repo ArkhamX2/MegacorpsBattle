@@ -31,7 +31,7 @@ s.listen(2)
 print("Waiting for a connection, Server Started")
 
 start_game=False
-d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
+d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False],"DevPoint":[]}
 deck=[]
 dealed=False
 def startNewGame():
@@ -70,6 +70,7 @@ def startNewGame():
         if player.id!=0:
             d["PHend"][player.id-1]+=deck.getCardById(player.id)
             d["BCards"]+=deck.getCardById(player.id)
+            d["DevPoint"].append(player.development_points)
     dealed=True
 
 def giveCart(players):
@@ -84,7 +85,7 @@ def giveCart(players):
 #d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 def threaded_client(conn, player):
     tmp=player-1
-    conn.send(pickle.dumps([d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"]]))
+    conn.send(pickle.dumps([d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"],d["DevPoint"]]))
     reply = ""
     while True:
         try:
@@ -94,12 +95,13 @@ def threaded_client(conn, player):
                 d["PHend"][tmp] = data[1]
                 d["BCards"] = data[2]
                 d["IsReady"] = data[3]
+                d["DevPoint"]=data[4]
 
             if not data:
                 print("Disconnected")
                 break
             else:
-                reply=[d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"]]
+                reply=[d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"],d["DevPoint"]]
                 #time.sleep(3) 
 
                 #print("Received: ", data)
@@ -110,6 +112,10 @@ def threaded_client(conn, player):
             break
     print("Lost connection")
     conn.close()
+
+def getDevPoint():
+    return 
+
 
 currentPlayer = 1
 
