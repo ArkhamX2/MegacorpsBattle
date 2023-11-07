@@ -13,7 +13,7 @@ def main():
     clock = pygame.time.Clock()
     player_count=0
 
-#d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
+#[d["PNum"][tmp],d["PHend"][tmp],d["BCards"],d["IsReady"]]
     
     while run:
         clock.tick(60)

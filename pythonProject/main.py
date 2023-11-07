@@ -60,7 +60,7 @@ deck = Deck(
 deck.deal(players)
 
 handHandler = HandHandler(HandBox(1,deck))
-
+colliders=[False,False,False,False,False,False]
 initialized = False
 while 1:
 
@@ -70,9 +70,19 @@ while 1:
             sys.exit()
         if keys[pygame.K_ESCAPE]:
             sys.exit()
+        if i.type == pygame.MOUSEBUTTONDOWN:
+            if i.button == 1:
+                for i in range(0,6):
+                    if (colliders[i]):
+                        print(i)
 
     if initialized == False:
         handHandler.placeHand(sc)
+
+    point = pygame.mouse.get_pos()
+
+    for i in range(0,6):
+        colliders[i]=handHandler.handbox.rects[i].collidepoint(point)
 
     handHandler.update(sc)
 
