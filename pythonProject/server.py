@@ -32,7 +32,7 @@ print("Waiting for a connection, Server Started")
 
 start_game=False
 d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
-deck=[]
+deck=Deck()
 def startNewGame():
     print("Starting game...")
     players = [
@@ -43,23 +43,32 @@ def startNewGame():
         Player(0, "Dealer", 0),
     ]
     deck = Deck(
-        [Advertisement(),
-         AntivirusSpyWorm(),
-         AntivirusTrojanBotnet(),
-         AntivirusTrojanWorm(),
-         BlockFishingScripting(),
-         DoSAttackCard(),
-         DoSDefence(),
-         TrojanCard(),
-         SpyCard()
+        [Advertisement(True),
+         AntivirusSpyWorm(True),
+         AntivirusTrojanBotnet(True),
+         AntivirusTrojanWorm(True),
+         BlockFishingScripting(True),
+         DoSAttackCard(True),
+         DoSDefence(True),
+         TrojanCard(True),
+         SpyCard(True)
          ])
 
     deck.deal(players)
     for player in players:
         if player.id!=0:
             d["PHend"][player.id-1]=deck.getCardById(player.id)
-            print(d["PHend"])
+            print(len(d["PHend"][player.id-1]))
             d["BCards"]+=deck.getCardById(player.id)
+
+def giveCart(players):
+    deck.deal(players)
+    for player in players:
+        if player.id != 0:
+            d["PHend"][player.id - 1] = deck.getCardById(player.id)
+            print(len(d["PHend"][player.id - 1]))
+            d["BCards"] += deck.getCardById(player.id)
+
 
 #d={"PNum": [],"PHend": [[],[],[],[]], "BCards": [], "IsReady": [False, False, False, False]}
 def threaded_client(conn, player):
