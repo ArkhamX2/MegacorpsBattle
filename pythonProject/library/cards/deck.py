@@ -1,18 +1,26 @@
+import copy
 import random
-from library.cards.card import Card
-from library.player import Player
+from pythonProject.library.cards.card import Card
+from pythonProject.library.player import Player
 
-MAX_DECK_SIZE = 30
+from pythonProject.library.cards.TransferCard import TransferCard
+
+MAX_DECK_SIZE = 4
 
 class Deck:
 
     def __init__(self, cardList:[Card]):
         self.cardList = cardList
         tmp = []
-        for i in range(MAX_DECK_SIZE):
-            tmp.append(self.cardList[i%len(cardList)])
+        for i in range(MAX_DECK_SIZE*len(cardList)):
+            tmp.append( TransferCard(i%len(cardList),0,0,0))
         random.shuffle(tmp)
         self.cards=tmp
+
+    def shufle(self):
+        random.shuffle(self.cards)
+        return
+
 
     def deal(self, players:[Player]):
         for i in range(1,len(players)):
@@ -58,6 +66,37 @@ class Deck:
                 string+=str(card)
         string += "\nPlayer4:\n"
         return string
+    def getCardById(self,id:int):
+        list=[]
+        for card in self.cards:
+            if card.owner==id:
+                list.append(copy.deepcopy(card))
+        return list
+    def getThrownCard(self):
+        list = []
+        for card in self.cards:
+            if card.isThrown == True:
+                list.append(copy.deepcopy(card))
+        return list
+    def getIsPlayedCard(self):
+        list = []
+        for card in self.cards:
+            if card.isPlayed == True:
+                list.append(copy.deepcopy(card))
+        return list
+    def getIsUnPlayedCard(self):
+        list = []
+        for card in self.cards:
+            if card.isPlayed == False:
+                list.append(copy.deepcopy(card))
+        return list
+    def getThrownCard(self):
+        list = []
+        for card in self.cards:
+            if card.isThrown == False:
+                list.append(copy.deepcopy(card))
+        return list
+
 
 
 
