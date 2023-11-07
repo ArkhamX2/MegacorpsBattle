@@ -10,30 +10,35 @@ class DefenceCard(Card):
 
 class Advertisement(DefenceCard):
     
-    def __init__(self):
-        super().__init__(True,"Advertisement.png")
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"Advertisement.png")
         
 class AntivirusSpyWorm(DefenceCard):
     
-    def __init__(self):
-        super().__init__(True,"AntivirusSpyWorm.png")
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"AntivirusSpyWorm.png")
 
 class AntivirusTrojanBotnet(DefenceCard):
     
-    def __init__(self):
-        super().__init__(True,"AntivirusTrojanBotnet.png")
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"AntivirusTrojanBotnet.png")
 
 class AntivirusTrojanWorm(DefenceCard):
     
-    def __init__(self):
-        super().__init__(True,"AntivirusTrojanWorm.png")
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"AntivirusTrojanWorm.png")
 
 class BlockFishingScripting(DefenceCard):
     
-    def __init__(self):
-        super().__init__(True,"BlockFishingScripting.png")
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"BlockFishingScripting.png")
 
 class DoSDefence(DefenceCard):
     
-    def __init__(self):
-        super().__init__(True,"DoSDefence.png")
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"DoSDefence.png")
+        
+class BrandmauerCard(DefenceCard):
+    
+    def __init__(self, isOposite):
+        super().__init__(isOposite,"Branmauer.png")

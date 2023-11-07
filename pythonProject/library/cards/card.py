@@ -23,19 +23,22 @@ class Card(pygame.sprite.Sprite):
         self.isPlayed=False
 
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(RESOURSES_PATH + self.cardImage).convert_alpha()
-
-        self.rect = self.image.get_rect(center=(0,0))
-        self.flip()
-
-    def flip(self):
-        self.image = pygame.image.load(RESOURSES_PATH + self.cardImageOposite).convert_alpha() if self.isOposite else pygame.image.load(RESOURSES_PATH + self.cardImage).convert_alpha()
         
         if self.isOposite:
             self.image = pygame.image.load(RESOURSES_PATH + "cardOposite.png").convert_alpha() 
         else:
             self.image = pygame.image.load(RESOURSES_PATH + self.cardImage).convert_alpha()
+
+        self.rect = self.image.get_rect(center=(0,0))
+
+    def flip(self):
         self.isOposite = not(self.isOposite)
+        
+        if self.isOposite == True:
+            self.image = pygame.image.load(RESOURSES_PATH + "cardOposite.png").convert_alpha() 
+        elif self.isOposite == False:
+            self.image = pygame.image.load(RESOURSES_PATH + self.cardImage).convert_alpha()
+
 
     def Throw(self):
         self.isThrown = True

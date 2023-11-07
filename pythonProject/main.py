@@ -11,14 +11,14 @@ from UI.handBox import HandBox
 Width = 1366
 Height = 768
 
-GREEN = (200, 255, 200)
+PURPLE = (162, 148, 210)
 WHITE = (255, 255, 255)
 pygame.init()
 # sc = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 sc = pygame.display.set_mode((Width, Height))
-sc.fill(GREEN)
+sc.fill(PURPLE)
 sf = pygame.image.load('pythonProject\\resourses\\Background.png')
-rt = sf.get_rect(bottomright = (Width,Height))
+rt = sf.get_rect(center = (Width//2,Height//2))
 sc.blit(sf,rt)
 
 from library.cards.deck import Deck
@@ -32,15 +32,25 @@ players = [
 ]
 
 deck = Deck(
-        [Advertisement(),
-        AntivirusSpyWorm(),
-        AntivirusTrojanBotnet(),
-        AntivirusTrojanWorm(),
-        BlockFishingScripting(),
-        DoSAttackCard(),
-        DoSDefence(),
-        TrojanCard(),
-        SpyCard()
+        [Advertisement(True),
+        AntivirusSpyWorm(True),
+        AntivirusTrojanBotnet(True),
+        AntivirusTrojanWorm(True),
+        BlockFishingScripting(True),
+        DoSAttackCard(True),
+        DoSDefence(True),
+        TrojanCard(True),
+        SpyCard(True),
+        BruteForceCard(True),
+        SiteScriptingCard(True),
+        WormCard(True),
+        BrandmauerCard(True),
+        PetrDeveloper(True),
+        MatveyDeveloper(True),
+        AlekseyDeveloper(True),
+        Tester137Developer(True),
+        Tester139Developer(True),
+        Tester137GoldDeveloper(True)
         ])
 
 deck.deal(players)
@@ -57,8 +67,9 @@ while 1:
             sys.exit()
 
     hand.draw(sc)
+    hand.flip()
     pygame.display.update()
 
-    pygame.time.delay(20)
+    pygame.time.delay(100)
 
     
