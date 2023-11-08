@@ -8,8 +8,9 @@ class User():
         self.id=id
         self.ip=ip
         self.connected=True
-
-server = "192.168.77.135"
+        
+server = "localhost"
+#server = "192.168.77.135"
 port = 6666
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

@@ -1,14 +1,22 @@
 import pygame
 from network import Network
 from player import Player
-width = 500
-height = 500
+width = 700
+height = 700
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Client")
 
 
 def redrawWindow(win,player, player2, player3, player4):
     win.fill((255,255,255))
+    if player.x<0:
+        player.x=width-player.width
+    if player.x>width-player.width:
+        player.x=0       
+    if player.y<0:
+        player.y=width-player.height
+    if player.y>width-player.height:
+        player.y=0
     player.draw(win)
     if player2!=None:
         player2.draw(win)
