@@ -9,7 +9,7 @@ class User():
         self.ip=ip
         self.connected=True
 
-server = "localhost"
+server = "192.168.77.135"
 port = 6666
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,7 +30,7 @@ def threaded_client(conn, player, user):
     reply = ""
     while True:
         try:
-            data = pickle.loads(conn.recv(2048))
+            data = pickle.loads(conn.recv(8192))
             players[player] = data
 
             if not data:
@@ -43,8 +43,8 @@ def threaded_client(conn, player, user):
                     if (i!=player):
                         reply.append(players[i])
 
-                print("Received: ", data)
-                print("Sending : ", reply)
+                #print("Received: ", data)
+                #print("Sending : ", reply)
 
             conn.sendall(pickle.dumps(reply))
         except:
