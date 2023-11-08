@@ -27,6 +27,14 @@ class Player():
         if keys[pygame.K_DOWN]:
             self.y += self.vel
 
+        if keys[pygame.K_n]:
+            self.height += 1
+            self.width += 1
+
+        if keys[pygame.K_m]:
+            self.height -= 1
+            self.width -= 1
+
         self.update()
 
     def update(self):
